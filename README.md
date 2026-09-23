@@ -1,4 +1,7 @@
-# Hướng dẫn Sử dụng VACPA Planner 2026
+# 📚 VACPA Planner 2026
+
+> 🌐 **TRUY CẬP ỨNG DỤNG ONLINE TẠI ĐÂY:**  
+> 👉 **[https://hoae01.github.io/vacpa-planner-2026/](https://hoae01.github.io/vacpa-planner-2026/)**
 
 Ứng dụng web cá nhân hóa dành riêng cho **Vũ Đức Hoàng** để quản lý tiến độ ôn thi Chứng chỉ Kiểm toán viên (CPA / VACPA 2026), bám sát 100% tài liệu **Planner ôn thi 6 môn VACPA**.
 
