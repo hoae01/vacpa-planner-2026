@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VACPA Planner 2026 | Quản lý Tiến độ Ôn thi Kiểm toán viên</title>
+  <meta name="description" content="Ứng dụng quản lý lộ trình và tiến độ tự ôn thi Chứng chỉ Kiểm toán viên VACPA / CPA 2026 dành riêng cho Vũ Đức Hoàng.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%2338bdf8%22/><text y=%2268%22 x=%2250%22 text-anchor=%22middle%22 font-size=%2250%22 font-weight=%22900%22 fill=%22white%22 font-family=%22sans-serif%22>CPA</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="container">
+    <!-- ==========================================
+         TOP HEADER
+         ========================================== -->
+    <header class="app-header">
+      <div class="header-left">
+        <div class="brand-badge">CPA</div>
+        <div class="brand-info">
+          <h1 id="app-title">Lộ trình Ôn thi VACPA 2026</h1>
+          <div class="brand-meta">
+            <span class="user-badge" id="user-badge-display">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span id="user-name-text">Vũ Đức Hoàng</span>
+            </span>
+            <span id="target-exam-text">Mục tiêu thi: 14/11/2026</span>
+            <span id="storage-status-badge" class="storage-badge" title="Trạng thái lưu trữ dữ liệu">
+              <span class="status-dot">●</span> <span id="storage-status-text">Đang kiểm tra lưu trữ...</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button id="btn-theme-toggle" class="btn btn-secondary btn-icon" title="Chuyển chế độ Sáng / Tối">
+          <svg id="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          <svg id="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        </button>
+
+        <button id="btn-open-settings" class="btn btn-secondary" title="Cài đặt môn học & Mốc thi">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span>Cấu hình</span>
+        </button>
+
+        <button id="btn-export-backup" class="btn btn-secondary" title="Xuất dữ liệu dự phòng">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+          <span>Sao lưu</span>
+        </button>
+
+        <button id="btn-import-backup" class="btn btn-secondary" title="Khôi phục dữ liệu từ tệp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+          <span>Phục hồi</span>
+        </button>
+        <input type="file" id="import-file-input" accept=".json" style="display:none;">
+      </div>
+    </header>
+
+    <!-- ==========================================
+         METRICS DASHBOARD
+         ========================================== -->
+    <main>
+      <section class="metrics-grid" aria-label="Bảng tổng quan số liệu">
+        <!-- Metric 1: Countdown -->
+        <article class="metric-card accent-cyan" id="card-countdown">
+          <div class="metric-header">
+            <span class="metric-label">Đếm ngược ngày thi</span>
+            <div class="metric-icon">⏳</div>
+          </div>
+          <div class="metric-value-group">
+            <span class="metric-value" id="countdown-days">--</span>
+            <span class="metric-unit">ngày</span>
+          </div>
+          <p class="metric-subtext" id="countdown-subtext">Đến ngày thi 14/11/2026</p>
+        </article>
+
+        <!-- Metric 2: Total Progress -->
+        <article class="metric-card accent-emerald" id="card-total-progress">
+          <div class="metric-header">
+            <span class="metric-label">Tổng tiến độ lộ trình</span>
+            <div class="metric-icon">🎯</div>
+          </div>
+          <div class="metric-value-group">
+            <span class="metric-value" id="progress-percent">0%</span>
+            <span class="metric-unit" id="progress-ratio">0/53 buổi</span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="progress-bar-total" style="width: 0%;"></div>
+          </div>
+          <p class="metric-subtext" id="progress-subtext">Khung giờ gợi ý: 20:00 - 22:30</p>
+        </article>
+
+        <!-- Metric 3: Theory Phase -->
+        <article class="metric-card accent-purple" id="card-theory-phase">
+          <div class="metric-header">
+            <span class="metric-label">GĐ 1: Bao phủ lý thuyết</span>
+            <div class="metric-icon">📖</div>
+          </div>
+          <div class="metric-value-group">
+            <span class="metric-value" id="theory-percent">0%</span>
+            <span class="metric-unit" id="theory-ratio">0/30 ngày</span>
+          </div>
+          <p class="metric-subtext">Mục tiêu: Đạt lũy kế 100% đề cương 4 phần A/B/C/D</p>
+        </article>
+
+        <!-- Metric 4: Practice Phase -->
+        <article class="metric-card accent-amber" id="card-practice-phase">
+          <div class="metric-header">
+            <span class="metric-label">GĐ 2: Luyện đề & Nước rút</span>
+            <div class="metric-icon">📝</div>
+          </div>
+          <div class="metric-value-group">
+            <span class="metric-value" id="practice-percent">0%</span>
+            <span class="metric-unit" id="practice-ratio">0/23 ngày</span>
+          </div>
+          <p class="metric-subtext">12 bộ môn (A/B) + 2 buổi thi thử hỗn hợp 120'</p>
+        </article>
+      </section>
+
+      <!-- ==========================================
+           SUBJECTS COVERAGE SECTION
+           ========================================== -->
+      <section class="subjects-section" aria-label="Tiến độ bao phủ 6 môn">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              Bao phủ đề cương & Điểm thi 6 môn
+            </h2>
+            <p class="section-subtitle">Tiến độ 4 phần A/B/C/D (25% → 50% → 75% → 100%) và kết quả làm bài Bộ A / Bộ B</p>
+          </div>
+        </div>
+
+        <div class="subjects-grid" id="subjects-container">
+          <!-- Rendered dynamically by JavaScript -->
+        </div>
+      </section>
+
+      <!-- ==========================================
+           DAILY SCHEDULE & CHECKLIST
+           ========================================== -->
+      <section class="schedule-section" aria-label="Lộ trình chi tiết từng ngày">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Lộ trình chi tiết theo ngày
+            </h2>
+            <p class="section-subtitle">Đánh dấu hoàn thành, lưu điểm thi thử và ghi chú điểm cốt lõi</p>
+          </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="schedule-controls">
+          <!-- Phase Filter -->
+          <div class="filter-group" id="phase-filters">
+            <button class="filter-btn active" data-phase="all" id="filter-phase-all">Tất cả giai đoạn</button>
+            <button class="filter-btn" data-phase="theory" id="filter-phase-theory">Lý thuyết (30 ngày)</button>
+            <button class="filter-btn" data-phase="practice" id="filter-phase-practice">Luyện đề (23 ngày)</button>
+            <button class="filter-btn" data-phase="extended" id="filter-phase-extended" style="display:none;">Nối dài (7 ngày)</button>
+          </div>
+
+          <!-- Subject Filter -->
+          <div class="filter-group" id="subject-filters">
+            <button class="filter-btn active" data-subject="all" id="filter-sub-all">Mọi môn</button>
+            <!-- Generated dynamically based on active subjects -->
+          </div>
+
+          <!-- Status Filter -->
+          <div class="filter-group" id="status-filters">
+            <button class="filter-btn active" data-status="all" id="filter-status-all">Tất cả</button>
+            <button class="filter-btn" data-status="today" id="filter-status-today">Hôm nay</button>
+            <button class="filter-btn" data-status="pending" id="filter-status-pending">Chưa xong</button>
+            <button class="filter-btn" data-status="completed" id="filter-status-completed">Đã xong</button>
+          </div>
+        </div>
+
+        <!-- Schedule Items List -->
+        <div class="schedule-list" id="schedule-container">
+          <!-- Rendered dynamically by JavaScript -->
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ==========================================
+       SETTINGS MODAL
+       ========================================== -->
+  <div class="modal-overlay" id="settings-modal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">Cài đặt & Cấu hình Lộ trình</h3>
+        <button class="btn-close" id="btn-close-settings" aria-label="Đóng">&times;</button>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="input-user-name">Họ và tên thí sinh</label>
+        <input type="text" id="input-user-name" class="form-control" value="Vũ Đức Hoàng">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="input-exam-date">Ngày thi mục tiêu (Dự kiến)</label>
+        <input type="date" id="input-exam-date" class="form-control" value="2026-11-14">
+      </div>
+
+      <div class="form-group">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 8px;">
+          <label class="form-label" style="margin-bottom:0;">Kích hoạt phương án 7 ngày nối dài</label>
+          <label class="toggle-switch">
+            <input type="checkbox" id="toggle-extended-schedule">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <p style="font-size:12px; color:var(--text-muted);">
+          Theo trang 1 & 7 của Planner: Chỉ áp dụng khi ngày thi được dời sau 14/11 để nâng thời gian luyện đề từ 23 lên 30 ngày (kết thúc 20/11).
+        </p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Quản lý danh sách môn thi (Bật / Tắt theo diện thi thực tế)</label>
+        <div id="modal-subjects-list">
+          <!-- Dynamic subject toggles -->
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; gap:12px; margin-top:24px; padding-top:16px; border-top:1px solid var(--border-color);">
+        <button id="btn-reset-data" class="btn btn-secondary" style="color:var(--accent-rose); border-color:rgba(244,63,94,0.3);">
+          Đặt lại mặc định
+        </button>
+        <button id="btn-save-settings" class="btn btn-primary">
+          Lưu cấu hình
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Element -->
+  <div id="app-toast" class="toast" role="status" aria-live="polite">
+    <span id="toast-message">Đã lưu thông tin</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
