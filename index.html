@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VACPA Planner 2026 | Quản lý Tiến độ Ôn thi Kiểm toán viên</title>
-  <meta name="description" content="Ứng dụng quản lý lộ trình và tiến độ tự ôn thi Chứng chỉ Kiểm toán viên VACPA / CPA 2026 dành riêng cho Vũ Đức Hoàng.">
+  <title>VACPA Planner 2026 | Quản lý Tiến độ, Ôn luyện Lý thuyết & Bài tập Kiểm toán viên</title>
+  <meta name="description" content="Ứng dụng quản lý lộ trình, tích hợp trọn bộ 7 Chuyên đề Bộ Tài chính 2026, ôn luyện lý thuyết A/B/C/D và làm bài tập thi thử dành riêng cho Vũ Đức Hoàng.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%2338bdf8%22/><text y=%2268%22 x=%2250%22 text-anchor=%22middle%22 font-size=%2250%22 font-weight=%22900%22 fill=%22white%22 font-family=%22sans-serif%22>CPA</text></svg>">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -18,7 +18,7 @@
       <div class="header-left">
         <div class="brand-badge">CPA</div>
         <div class="brand-info">
-          <h1 id="app-title">Lộ trình Ôn thi VACPA 2026</h1>
+          <h1 id="app-title">Ôn thi Kiểm toán viên (VACPA) 2026</h1>
           <div class="brand-meta">
             <span class="user-badge" id="user-badge-display">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -57,11 +57,36 @@
     </header>
 
     <!-- ==========================================
-         METRICS DASHBOARD
+         TOP MAIN NAVIGATION TABS
          ========================================== -->
-    <main>
+    <nav class="app-nav" aria-label="Thanh điều hướng chính">
+      <button class="nav-tab active" data-tab="planner" id="tab-nav-planner">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>📅 Lộ trình Ôn thi</span>
+      </button>
+
+      <button class="nav-tab" data-tab="theory" id="tab-nav-theory">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <span>📖 Ôn luyện Lý thuyết</span>
+      </button>
+
+      <button class="nav-tab" data-tab="exercises" id="tab-nav-exercises">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <span>📝 Làm bài tập & Luyện đề</span>
+      </button>
+
+      <button class="nav-tab" data-tab="materials" id="tab-nav-materials">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        <span>📚 Tài liệu gốc (PDF)</span>
+      </button>
+    </nav>
+
+    <!-- ==========================================
+         TAB 1: LỘ TRÌNH HỌC TẬP (PLANNER)
+         ========================================== -->
+    <main id="view-planner" class="tab-view active">
+      <!-- Metrics Dashboard -->
       <section class="metrics-grid" aria-label="Bảng tổng quan số liệu">
-        <!-- Metric 1: Countdown -->
         <article class="metric-card accent-cyan" id="card-countdown">
           <div class="metric-header">
             <span class="metric-label">Đếm ngược ngày thi</span>
@@ -74,7 +99,6 @@
           <p class="metric-subtext" id="countdown-subtext">Đến ngày thi 14/11/2026</p>
         </article>
 
-        <!-- Metric 2: Total Progress -->
         <article class="metric-card accent-emerald" id="card-total-progress">
           <div class="metric-header">
             <span class="metric-label">Tổng tiến độ lộ trình</span>
@@ -90,7 +114,6 @@
           <p class="metric-subtext" id="progress-subtext">Khung giờ gợi ý: 20:00 - 22:30</p>
         </article>
 
-        <!-- Metric 3: Theory Phase -->
         <article class="metric-card accent-purple" id="card-theory-phase">
           <div class="metric-header">
             <span class="metric-label">GĐ 1: Bao phủ lý thuyết</span>
@@ -103,7 +126,6 @@
           <p class="metric-subtext">Mục tiêu: Đạt lũy kế 100% đề cương 4 phần A/B/C/D</p>
         </article>
 
-        <!-- Metric 4: Practice Phase -->
         <article class="metric-card accent-amber" id="card-practice-phase">
           <div class="metric-header">
             <span class="metric-label">GĐ 2: Luyện đề & Nước rút</span>
@@ -117,9 +139,7 @@
         </article>
       </section>
 
-      <!-- ==========================================
-           SUBJECTS COVERAGE SECTION
-           ========================================== -->
+      <!-- Subjects Coverage Section -->
       <section class="subjects-section" aria-label="Tiến độ bao phủ 6 môn">
         <div class="section-header">
           <div>
@@ -132,13 +152,11 @@
         </div>
 
         <div class="subjects-grid" id="subjects-container">
-          <!-- Rendered dynamically by JavaScript -->
+          <!-- Rendered dynamically -->
         </div>
       </section>
 
-      <!-- ==========================================
-           DAILY SCHEDULE & CHECKLIST
-           ========================================== -->
+      <!-- Daily Schedule & Checklist -->
       <section class="schedule-section" aria-label="Lộ trình chi tiết từng ngày">
         <div class="section-header">
           <div>
@@ -152,7 +170,6 @@
 
         <!-- Filter Bar -->
         <div class="schedule-controls">
-          <!-- Phase Filter -->
           <div class="filter-group" id="phase-filters">
             <button class="filter-btn active" data-phase="all" id="filter-phase-all">Tất cả giai đoạn</button>
             <button class="filter-btn" data-phase="theory" id="filter-phase-theory">Lý thuyết (30 ngày)</button>
@@ -160,13 +177,10 @@
             <button class="filter-btn" data-phase="extended" id="filter-phase-extended" style="display:none;">Nối dài (7 ngày)</button>
           </div>
 
-          <!-- Subject Filter -->
           <div class="filter-group" id="subject-filters">
             <button class="filter-btn active" data-subject="all" id="filter-sub-all">Mọi môn</button>
-            <!-- Generated dynamically based on active subjects -->
           </div>
 
-          <!-- Status Filter -->
           <div class="filter-group" id="status-filters">
             <button class="filter-btn active" data-status="all" id="filter-status-all">Tất cả</button>
             <button class="filter-btn" data-status="today" id="filter-status-today">Hôm nay</button>
@@ -177,10 +191,173 @@
 
         <!-- Schedule Items List -->
         <div class="schedule-list" id="schedule-container">
-          <!-- Rendered dynamically by JavaScript -->
+          <!-- Rendered dynamically -->
         </div>
       </section>
     </main>
+
+    <!-- ==========================================
+         TAB 2: ÔN LUYỆN LÝ THUYẾT (THEORY REVIEW)
+         ========================================== -->
+    <section id="view-theory" class="tab-view" style="display:none;" aria-label="Khu vực ôn luyện lý thuyết">
+      <div class="view-header">
+        <div>
+          <h2 class="view-title">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            Ôn luyện Lý thuyết Chuyên sâu 7 Chuyên đề Bộ Tài chính
+          </h2>
+          <p class="view-subtitle">Bao phủ 100% đề cương theo 4 mốc Phần A (25%) → B (50%) → C (75%) → D (100%), đối chiếu chuẩn mực và văn bản luật mới 2026.</p>
+        </div>
+      </div>
+
+      <!-- Theory Filter & Search Bar -->
+      <div class="theory-controls">
+        <div class="subject-pills-bar" id="theory-subject-pills">
+          <!-- Subject pills dynamically generated -->
+        </div>
+
+        <div class="theory-sub-controls">
+          <div class="part-filter-group" id="theory-part-filters">
+            <button class="filter-btn active" data-part="all">Tất cả phần</button>
+            <button class="filter-btn" data-part="A">Phần A (25%)</button>
+            <button class="filter-btn" data-part="B">Phần B (50%)</button>
+            <button class="filter-btn" data-part="C">Phần C (75%)</button>
+            <button class="filter-btn" data-part="D">Phần D (100%)</button>
+          </div>
+
+          <div class="search-input-wrapper">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="theory-search-input" class="search-input" placeholder="Tìm kiếm khái niệm, điều luật, công thức...">
+          </div>
+        </div>
+      </div>
+
+      <!-- Theory Content Container -->
+      <div class="theory-cards-container" id="theory-cards-container">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 3: LÀM BÀI TẬP & LUYỆN ĐỀ (EXERCISES)
+         ========================================== -->
+    <section id="view-exercises" class="tab-view" style="display:none;" aria-label="Khu vực làm bài tập và thi thử">
+      <div class="view-header">
+        <div>
+          <h2 class="view-title">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            Làm Bài tập & Luyện đề Thi thử KTV 2026
+          </h2>
+          <p class="view-subtitle">Hệ thống bài tập trắc nghiệm, tự luận tính toán & tình huống thực tế bám sát tài liệu Chuyên đề Bộ Tài chính.</p>
+        </div>
+
+        <!-- Mode Toggle: Study vs Exam -->
+        <div class="exercise-mode-switcher">
+          <button class="mode-btn active" id="btn-mode-study" data-mode="study">
+            <span class="mode-dot dot-green"></span>
+            <span>Chế độ Ôn tập (Tự do)</span>
+          </button>
+          <button class="mode-btn" id="btn-mode-exam" data-mode="exam">
+            <span class="mode-dot dot-amber"></span>
+            <span>Chế độ Thi thử (Bấm giờ)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise Filters & Controls -->
+      <div class="exercise-controls">
+        <div class="filter-group" id="exercise-subject-pills">
+          <!-- Subject pills dynamically generated -->
+        </div>
+
+        <div class="filter-group" id="exercise-set-filters">
+          <button class="filter-btn active" data-set="all">Tất cả bộ đề</button>
+          <button class="filter-btn" data-set="set_a">Bộ đề A (90')</button>
+          <button class="filter-btn" data-set="set_b">Bộ đề B (90')</button>
+          <button class="filter-btn" data-set="mixed">Đề hỗn hợp (120')</button>
+        </div>
+      </div>
+
+      <!-- Active Exam Info / Timer Bar (Visible in Exam mode) -->
+      <div class="exam-active-bar" id="exam-active-bar" style="display:none;">
+        <div class="exam-meta">
+          <span class="exam-title-badge" id="exam-current-title">Thi thử Bộ đề A</span>
+          <span class="exam-progress-counter" id="exam-progress-text">Câu 1/10</span>
+        </div>
+        <div class="exam-timer-group">
+          <span class="timer-display" id="exam-timer-display">90:00</span>
+          <button class="btn btn-secondary btn-sm" id="btn-exam-toggle-pause">Tạm dừng</button>
+          <button class="btn btn-primary btn-sm" id="btn-exam-submit">Nộp bài thi</button>
+        </div>
+      </div>
+
+      <!-- Question Navigator Bar -->
+      <div class="question-navigator" id="question-navigator">
+        <!-- Question number pills rendered dynamically -->
+      </div>
+
+      <!-- Main Question Container -->
+      <div class="exercise-card-container" id="exercise-card-container">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+
+      <!-- Exam Result Modal / Banner Container -->
+      <div id="exercise-result-container" style="display:none;"></div>
+    </section>
+
+    <!-- ==========================================
+         TAB 4: THƯ VIỆN TÀI LIỆU GỐC (PDF CENTER)
+         ========================================== -->
+    <section id="view-materials" class="tab-view" style="display:none;" aria-label="Thư viện tài liệu gốc">
+      <div class="view-header">
+        <div>
+          <h2 class="view-title">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            Thư viện Tài liệu Gốc - Bộ Tài chính 2026
+          </h2>
+          <p class="view-subtitle">Trọn bộ 7 Chuyên đề ôn thi KTV 2026 chính thức, văn bản hướng dẫn và Planner gốc. Đọc trực tuyến hoặc tải về máy.</p>
+        </div>
+
+        <a href="https://drive.google.com/drive/folders/1HMKL9nSA1ocmkX1zezpCA_qXadxBdE6o?hl=vi" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" title="Mở thư mục Google Drive gốc của Hội đồng thi">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <span>Link Drive gốc</span>
+        </a>
+      </div>
+
+      <!-- Materials Cards Grid -->
+      <div class="materials-grid" id="materials-catalog-container">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ==========================================
+       PDF VIEWER IN-APP MODAL
+       ========================================== -->
+  <div class="modal-overlay" id="pdf-viewer-modal" role="dialog" aria-modal="true" style="display:none;">
+    <div class="modal-box modal-box-large">
+      <div class="modal-header">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span class="brand-badge" style="font-size:12px; padding:3px 8px;">PDF</span>
+          <h3 class="modal-title" id="pdf-modal-title">Xem tài liệu PDF</h3>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <a id="btn-pdf-external" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" title="Mở trong tab trình duyệt mới">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span>Mở tab mới</span>
+          </a>
+          <a id="btn-pdf-download" href="#" download class="btn btn-secondary btn-sm" title="Tải file PDF về máy">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+            <span>Tải về</span>
+          </a>
+          <button class="btn-close" id="btn-close-pdf-modal" aria-label="Đóng">&times;</button>
+        </div>
+      </div>
+      <div class="pdf-frame-wrapper">
+        <iframe id="pdf-viewer-frame" src="" title="Trình xem tài liệu PDF" allowfullscreen></iframe>
+      </div>
+    </div>
   </div>
 
   <!-- ==========================================
@@ -241,6 +418,7 @@
 
   <!-- Scripts -->
   <script src="data.js"></script>
+  <script src="study_data.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
